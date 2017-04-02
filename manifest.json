@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "landsoflords community extension",
+    "version": "0.1",
+
+    "description": "add multiple UI improvements for landsoflords",
+
+    "permissions":
+    [
+        "*://*.landsoflords.com/*",
+        "activeTab",
+        "tabs"
+    ],
+
+    "content_scripts": 
+    [
+        {
+            "matches": ["*://*.landsoflords.com/*"],
+            "js": ["custom_game.js", "content.js"]
+        }
+    ],
+    "web_accessible_resources":["'custom_game.js'"]
+}
