@@ -19,5 +19,5 @@
             "js": ["custom_game.js", "content.js"]
         }
     ],
-    "web_accessible_resources":["'custom_game.js'"]
+    "web_accessible_resources":["config/config.html"]
 }

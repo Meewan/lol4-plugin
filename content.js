@@ -25,6 +25,9 @@ function pageEventHandlerInit()
 	document.addEventListener('pluginFromPageEvent_force_qual', function(){
 		refresh(true)
 	})
+	document.addEventListener('loadConfig', function(){
+		console.log('loadConfig')
+	})
 }
 
 // remove snow effect for performance improvement
@@ -53,7 +56,7 @@ function removeRain()
 // add end date on service bar bar
 function displayService(force)
 {
-	var services = document.getElementsByClassName('serv');
+	/*var services = document.getElementsByClassName('serv');
 	for (var i = 0; i < services.length; i++)
 	{
 		service = services[i];
@@ -77,13 +80,12 @@ function displayService(force)
 			service.classList.add('quality_text');
 
 		}
-	}
+	}*/
 }
 
 // add % on quality bar bar
 function displayQuality(force)
 {
-	return
 	var qualities = document.getElementsByClassName('qual');
 	for (var i = 0; i < qualities.length; i++)
 	{
@@ -200,6 +202,32 @@ function startRes()
 	}
 }
 
+function addConfigurationLink()
+{
+	if (document.getElementById("plugin-config"))
+	{
+		return
+	}
+	var user = document.getElementById("user")
+	var menu = user.getElementsByClassName("menu")[0]
+	var separators = user.getElementsByClassName("sep")
+	var tokens = separators[separators.length -1].nextSibling
+	var item = document.createElement("a")
+	item.id = "plugin-config"
+	item.className = "selected"
+	item.appendChild(document.createTextNode("plugin..."))
+	item.onclick = function(event)
+	{
+		var url = browser.extension.getURL("config/config.html")
+		var title = "lol plugin configuration window"
+		if( !window.open(url, title))
+		{
+			alert("please accept this pop up to open the plugin configuration")
+		}
+	}
+	menu.insertBefore(item, tokens.nextSibling)
+}
+
 function refresh(force)
 {
 	removeSnow(force);
@@ -207,6 +235,9 @@ function refresh(force)
 	displayQuality(force);
 	displayLife(force);
 	displayService(force);
+	addConfigurationLink();
+
+
 }
 
 function start()
