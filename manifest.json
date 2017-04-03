@@ -8,16 +8,20 @@
     "permissions":
     [
         "*://*.landsoflords.com/*",
-        "activeTab",
-        "tabs"
+        "storage"
     ],
 
     "content_scripts": 
     [
         {
             "matches": ["*://*.landsoflords.com/*"],
-            "js": ["custom_game.js", "content.js"]
+            "js": ["utils.js", "custom_game.js", "content.js"]
         }
     ],
-    "web_accessible_resources":["config/config.html"]
+
+    "options_ui": 
+    {
+        "page": "config/config.html"
+    }
+
 }

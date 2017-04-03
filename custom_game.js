@@ -3,12 +3,16 @@
 */
 function startMgmt(lol)
 {
+	if(!configuration.displayQuality || !configuration.displayLife)
+	{
+		return
+	}
 	if(lol.Mgmt)
 	{
 		var gameFunction = lol.Mgmt.updateWithData
 		var newFunction = function(data, setup){
 			var result = gameFunction(data, setup)
-			var event = new Event('pluginFromPageEvent_mgmt')
+			var event = new Event('pluginFromPageEvent')
 			document.dispatchEvent(event)
 			return result
 		}
@@ -18,6 +22,10 @@ function startMgmt(lol)
 
 function startArea(lol)
 {
+	if(!configuration.displayQuality || !configuration.displayLife)
+	{
+		return
+	}
 	if(lol.Area)
 	{
 		//manage refresh for end of action

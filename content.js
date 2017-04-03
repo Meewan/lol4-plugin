@@ -3,36 +3,27 @@
 // TODO add configuration tools
 
 var lol = window.wrappedJSObject.lol
-var jquery = window.wrappedJSObject.$
-var plugin = window.wrappedJSObject.plugin
+var configuration = {}
 
 
 
 function pageEventHandlerInit()
 {
 	document.addEventListener('pluginFromPageEvent', function(){
-		refresh()
-		console.log('simple refresh')
-
-	})
-	document.addEventListener('pluginFromPageEvent_mgmt', function(){
-		displayLife()
-		displayQuality()
+		refresh(false)
 	})
 	document.addEventListener('pluginFromPageEvent_force', function(){
 		refresh(true)
-	})
-	document.addEventListener('pluginFromPageEvent_force_qual', function(){
-		refresh(true)
-	})
-	document.addEventListener('loadConfig', function(){
-		console.log('loadConfig')
 	})
 }
 
 // remove snow effect for performance improvement
 function removeSnow()
 {
+	if(!configuration.removeSnow)
+	{
+		return
+	}
 	var snow_items = document.getElementsByClassName("snow");
 	for (var i = 0; i < snow_items.length; i++)
 	{
@@ -44,6 +35,10 @@ function removeSnow()
 // remove rain effect for performance improvement
 function removeRain()
 {
+	if(!configuration.removeRain)
+	{
+		return
+	}
 	var rain_items = document.getElementsByClassName("rain");
 	for (var i = 0; i < rain_items.length; i++)
 	{
@@ -56,7 +51,11 @@ function removeRain()
 // add end date on service bar bar
 function displayService(force)
 {
-	/*var services = document.getElementsByClassName('serv');
+	/*if(!configuration.displayService)
+	{
+		return
+	}
+	var services = document.getElementsByClassName('serv');
 	for (var i = 0; i < services.length; i++)
 	{
 		service = services[i];
@@ -86,6 +85,10 @@ function displayService(force)
 // add % on quality bar bar
 function displayQuality(force)
 {
+	if(!configuration.displayQuality)
+	{
+		return
+	}
 	var qualities = document.getElementsByClassName('qual');
 	for (var i = 0; i < qualities.length; i++)
 	{
@@ -119,6 +122,10 @@ function displayQuality(force)
 // add % on life bar
 function displayLife(force)
 {
+	if(!configuration.displayLife)
+	{
+		return
+	}
 	var states = document.getElementsByClassName('state');
 	for (var i = 0; i < states.length; i++)
 	{
@@ -193,6 +200,10 @@ function displayLife(force)
 
 function startRes()
 {
+	if(!configuration.displayQuality)
+	{
+		return
+	}
 	var slider = document.getElementById('ordQualSlider')
 	if(slider)
 	{
@@ -202,32 +213,6 @@ function startRes()
 	}
 }
 
-function addConfigurationLink()
-{
-	if (document.getElementById("plugin-config"))
-	{
-		return
-	}
-	var user = document.getElementById("user")
-	var menu = user.getElementsByClassName("menu")[0]
-	var separators = user.getElementsByClassName("sep")
-	var tokens = separators[separators.length -1].nextSibling
-	var item = document.createElement("a")
-	item.id = "plugin-config"
-	item.className = "selected"
-	item.appendChild(document.createTextNode("plugin..."))
-	item.onclick = function(event)
-	{
-		var url = browser.extension.getURL("config/config.html")
-		var title = "lol plugin configuration window"
-		if( !window.open(url, title))
-		{
-			alert("please accept this pop up to open the plugin configuration")
-		}
-	}
-	menu.insertBefore(item, tokens.nextSibling)
-}
-
 function refresh(force)
 {
 	removeSnow(force);
@@ -235,18 +220,20 @@ function refresh(force)
 	displayQuality(force);
 	displayLife(force);
 	displayService(force);
-	addConfigurationLink();
-
-
 }
 
 function start()
 {
-	pageEventHandlerInit()
-	startMgmt(lol)
-	startArea(lol)
-	startRes()
-	refresh()
+	getConfiguration(function(config)
+	{
+		configuration = config
+		pageEventHandlerInit()
+		startMgmt(lol)
+		startArea(lol)
+		startRes()
+		refresh()
+	})
+	
 }
 
-start();
+start()
