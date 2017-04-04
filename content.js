@@ -4,6 +4,7 @@
 
 var lol = window.wrappedJSObject.lol
 var configuration = {}
+var data = {}
 
 
 
@@ -207,19 +208,77 @@ function startRes()
 	var slider = document.getElementById('ordQualSlider')
 	if(slider)
 	{
-		slider.onmouseup = function(event){
+		slider.onmouseup = function(event)
+		{
 			displayQuality(true);
 		}
 	}
 }
 
+function updateSearch()
+{
+	var container = document.getElementById("anewacts")
+	if(container && configuration.searchAction)
+	{
+		for(var elt = container.firstChild; elt != null; elt = elt.nextElementSibling)
+		{
+			//get fulltext actionName
+			var c = elt.firstChild.firstChild
+			if(c.classList.contains("shortcut"))
+			{
+				c = c.nextElementSibling
+			}
+			var text = c.firstChild.data.toLowerCase()
+
+			if(data.search === "" || text.includes(data.search))
+			{
+				elt.style.display = "block"
+			}
+			else
+			{
+				elt.style.display = "none"
+			}
+
+		}
+	}
+}
+
+function startSearch()
+{
+	var anchor = document.getElementById("atabs")
+	if(anchor && configuration.searchAction)
+	{
+		var container = document.createElement('div')
+		var input = document.createElement('input')
+		input.type = "text"
+		input.id = "plugin_ActionSearch"
+		input.onkeyup = function(event)
+		{
+			event.stopPropagation()
+			data.search = event.target.value.toLowerCase()
+			updateSearch()
+		}
+		input.placeholder = "search action"
+		input.style.width = "94%"
+		input.style.background = "#fff url(/img/icon/search.png) no-repeat 7px center"
+		input.style.height = "30px"
+		input.style.backgroundSize = "16px 16px"
+		input.style.paddingLeft = "30px"
+
+		data.search = ""
+		container.appendChild(input)
+		anchor.parentNode.insertBefore(container, anchor)
+	}
+}
+
 function refresh(force)
 {
-	removeSnow(force);
-	removeRain(force);
-	displayQuality(force);
-	displayLife(force);
-	displayService(force);
+	removeSnow(force)
+	removeRain(force)
+	displayQuality(force)
+	displayLife(force)
+	displayService(force)
+	updateSearch()
 }
 
 function start()
@@ -231,6 +290,7 @@ function start()
 		startMgmt(lol)
 		startArea(lol)
 		startRes()
+		startSearch()
 		refresh()
 	})
 	

@@ -3,6 +3,7 @@ const DEFAULT_CONFIGURATION = {
 		removeSnow: true,
 		displayQuality: true,
 		displayLife: true,
+		searchAction: true
 }
 
 function start()

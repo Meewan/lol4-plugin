@@ -3,6 +3,7 @@ const DEFAULT_CONFIGURATION = {
 		removeSnow: true,
 		displayQuality: true,
 		displayLife: true,
+		searchAction: true
 }
 
 /**
@@ -23,4 +24,10 @@ function getConfiguration(callback, errback)
 		{
 			errback ? errback(error): logError(error)
 		})
+}
+
+
+function insertAfter(refElement, element)
+{
+	refElement.parentNode.insertBefore(element, refElement.nextSibling)
 }
