@@ -94,27 +94,31 @@ function displayQuality(force)
 	for (var i = 0; i < qualities.length; i++)
 	{
 		quality = qualities[i];
-		if(!quality.classList.contains('service_text') || force)
+		if(quality.className === 'qual')
 		{
-			if (quality.classList.contains('service_text'))
+			continue
+		}
+		if(!quality.classList.contains('qual_text') || force)
+		{
+			if (quality.classList.contains('qual_text'))
 			{
 				var old_child = document.getElementById(quality.dataset.pluginId)
 				old_child.parentNode.removeChild(old_child)
 			}
 			var container = document.createElement('div')
-			var value = quality.firstChild.style.width;
-			value = parseInt(value.substring(0, value.length - 1), 10);
-			value = 100 - value;
-			value = '' + value + '%';
-			var text = document.createTextNode(value);
-			container.appendChild(text);
-			container.style.textAlign = 'center';
-			container.style.width = '100%';
-			container.style.opacity = "0.6";
+			var value = quality.firstChild.style.width
+			value = parseInt(value.substring(0, value.length - 1), 10)
+			value = 100 - value
+			value = '' + value + '%'
+			var text = document.createTextNode(value)
+			container.appendChild(text)
+			container.style.textAlign = 'center'
+			container.style.width = '100%'
+			container.style.opacity = "0.6"
 			container.id = Math.random()
 			quality.dataset.pluginId = container.id
-			quality.appendChild(container);
-			quality.classList.add('service_text');
+			quality.appendChild(container)
+			quality.classList.add('qual_text')
 
 		}
 	}
