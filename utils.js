@@ -3,7 +3,8 @@ const DEFAULT_CONFIGURATION = {
 		removeSnow: true,
 		displayQuality: true,
 		displayLife: true,
-		searchAction: true
+		searchAction: true,
+		searcActionHistory: true
 }
 
 /**
@@ -26,8 +27,37 @@ function getConfiguration(callback, errback)
 		})
 }
 
+function getFromStorage(key, defaultValue, callback, errback){
+	var keyObj = {}
+	keyObj[key] = defaultValue
+	var item = browser.storage.local.get(keyObj)
+	item.then(
+		function(value)
+		{
+			callback(value[key])
+		},
+		function(error)
+		{
+			errback ? errback(error): logError(error)
+		})
+}
+
+function setToStorage(key, value)
+{
+	console.log(key, value)
+	var obj = {}
+	obj[key] = value
+	var result = browser.storage.local.set(obj)
+	result.then(null, logError)
+
+}
 
 function insertAfter(refElement, element)
 {
 	refElement.parentNode.insertBefore(element, refElement.nextSibling)
+}
+
+function logError(error)
+{
+	console.error(error)
 }

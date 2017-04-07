@@ -250,8 +250,17 @@ function updateSearch()
 function startSearch()
 {
 	var anchor = document.getElementById("atabs")
-	if(anchor && configuration.searchAction)
+
+	function doStartSearch(history)
 	{
+		if(configuration.searcActionHistory)
+		{
+			data.search = history
+		}
+		else
+		{
+			data.search = ""
+		}
 		var container = document.createElement('div')
 		var input = document.createElement('input')
 		input.type = "text"
@@ -261,6 +270,7 @@ function startSearch()
 			event.stopPropagation()
 			data.search = event.target.value.toLowerCase()
 			updateSearch()
+			setToStorage('searcActionHistoryData', data.search)
 		}
 		input.placeholder = "search action"
 		input.style.width = "94%"
@@ -268,10 +278,22 @@ function startSearch()
 		input.style.height = "30px"
 		input.style.backgroundSize = "16px 16px"
 		input.style.paddingLeft = "30px"
+		input.value = data.search
 
-		data.search = ""
 		container.appendChild(input)
 		anchor.parentNode.insertBefore(container, anchor)
+	}
+
+	if(anchor && configuration.searchAction)
+	{
+		if(configuration.searcActionHistory)
+		{
+			getFromStorage("searcActionHistoryData", "", doStartSearch)
+		}
+		else
+		{
+			doStartSearch("")
+		}
 	}
 }
 
