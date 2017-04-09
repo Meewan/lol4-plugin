@@ -44,7 +44,6 @@ function getFromStorage(key, defaultValue, callback, errback){
 
 function setToStorage(key, value)
 {
-	console.log(key, value)
 	var obj = {}
 	obj[key] = value
 	var result = browser.storage.local.set(obj)

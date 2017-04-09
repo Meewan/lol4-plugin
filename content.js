@@ -233,8 +233,7 @@ function updateSearch()
 				c = c.nextElementSibling
 			}
 			var text = c.firstChild.data.toLowerCase()
-
-			if(data.search === "" || text.includes(data.search))
+			if(!data.search || text.includes(data.search))
 			{
 				elt.style.display = "block"
 			}
@@ -282,6 +281,8 @@ function startSearch()
 
 		container.appendChild(input)
 		anchor.parentNode.insertBefore(container, anchor)
+
+		updateSearch()
 	}
 
 	if(anchor && configuration.searchAction)
