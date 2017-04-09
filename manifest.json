@@ -9,7 +9,7 @@
         {
             "id": "lol4-plugin@git",
             "strict_min_version": "52.0",
-            "update_url": "http://plugin.lol.meewan.fr/download/plugin/update.json"
+            "update_url": "https://plugin.lol.meewan.fr/download/plugin/update.json"
         }
     },
 
