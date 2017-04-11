@@ -4,7 +4,8 @@ const DEFAULT_CONFIGURATION = {
 		displayQuality: true,
 		displayLife: true,
 		searchAction: true,
-		searcActionHistory: true
+		searcActionHistory: true,
+		displayLifeHeavyUpdate: true
 }
 
 function start()

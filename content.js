@@ -156,6 +156,7 @@ function displayLife(force)
 		var text = document.createTextNode(value);
 		container.appendChild(text);
 		state.dataset.pluginId = Math.random()
+		container.id = state.dataset.pluginId
 		// building life
 		if (state.classList.contains('roundBottom'))
 		{
@@ -313,6 +314,7 @@ function start()
 	getConfiguration(function(config)
 	{
 		configuration = config
+		configInjector(lol, config)
 		pageEventHandlerInit()
 		startMgmt(lol)
 		startArea(lol)
