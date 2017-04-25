@@ -311,6 +311,8 @@ function refresh(force)
 
 function start()
 {
+	injectCode('script', js)
+	injectCode('style', css)
 	getConfiguration(function(config)
 	{
 		configuration = config

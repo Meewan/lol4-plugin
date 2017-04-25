@@ -52,6 +52,14 @@ function setToStorage(key, value)
 
 }
 
+
+function injectCode(type, code)
+{
+	var script = document.createElement(type);
+	script.textContent = code;
+	(document.head||document.documentElement).appendChild(script);
+}
+
 function insertAfter(refElement, element)
 {
 	refElement.parentNode.insertBefore(element, refElement.nextSibling)
