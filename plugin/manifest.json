@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "landsoflords community extension",
-    "version": "0.9.1",
+    "version": "0.9.2",
 
     "applications":
     {
@@ -25,7 +25,7 @@
     [
         {
             "matches": ["*://*.landsoflords.com/*"],
-            "js": ["utils.js", "custom_game.js", "content.js"]
+            "js": ["utils.js", "custom_game.js", "injectable.js", "content.js"]
         }
     ],
 
