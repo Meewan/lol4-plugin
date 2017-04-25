@@ -299,6 +299,19 @@ function startSearch()
 	}
 }
 
+
+function configInjector(lol, config)
+{
+	var json_config = JSON.stringify(config)
+	var code = `
+	lol.Plugin.config=JSON.parse('${json_config}')
+	console.log('config injected')
+	lol.Plugin.start()
+	console.log('started')
+	`
+	injectCode('script', code)
+}
+
 function refresh(force)
 {
 	removeSnow(force)
@@ -318,8 +331,6 @@ function start()
 		configuration = config
 		configInjector(lol, config)
 		pageEventHandlerInit()
-		startMgmt(lol)
-		startArea(lol)
 		startRes()
 		startSearch()
 		refresh()

@@ -25,7 +25,7 @@
     [
         {
             "matches": ["*://*.landsoflords.com/*"],
-            "js": ["utils.js", "custom_game.js", "injection.js", "content.js"]
+            "js": ["utils.js", "injection.js", "content.js"]
         }
     ],
 
