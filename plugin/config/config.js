@@ -5,7 +5,8 @@ const DEFAULT_CONFIGURATION = {
 		displayLife: true,
 		searchAction: true,
 		searcActionHistory: true,
-		displayLifeHeavyUpdate: true
+		displayLifeHeavyUpdate: true,
+		textSelect: true
 }
 
 function start()

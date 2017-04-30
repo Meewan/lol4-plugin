@@ -273,11 +273,6 @@ function startSearch()
 			setToStorage('searcActionHistoryData', data.search)
 		}
 		input.placeholder = "search action"
-		input.style.width = "94%"
-		input.style.background = "#fff url(/img/icon/search.png) no-repeat 7px center"
-		input.style.height = "30px"
-		input.style.backgroundSize = "16px 16px"
-		input.style.paddingLeft = "30px"
 		input.value = data.search
 
 		container.appendChild(input)
@@ -305,9 +300,7 @@ function configInjector(lol, config)
 	var json_config = JSON.stringify(config)
 	var code = `
 	lol.Plugin.config=JSON.parse('${json_config}')
-	console.log('config injected')
 	lol.Plugin.start()
-	console.log('started')
 	`
 	injectCode('script', code)
 }
@@ -324,12 +317,16 @@ function refresh(force)
 
 function start()
 {
-	injectCode('script', js)
-	injectCode('style', css)
+	injectCode('script', js['base'])
+	injectCode('style', css['base'])
 	getConfiguration(function(config)
 	{
 		configuration = config
 		configInjector(lol, config)
+		if(config.textSelect)
+		{
+			injectCode('style', css['text_select'])
+		}
 		pageEventHandlerInit()
 		startRes()
 		startSearch()

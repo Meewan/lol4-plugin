@@ -36,7 +36,6 @@ lol.Plugin.startMgmt = function()
 
 lol.Plugin.startArea = function()
 {
-	console.log('startarea')
 	if( lol.Plugin.config.displayQuality ||  lol.Plugin.config.displayLife)
 	{
 		//manage refresh for end of action
@@ -61,11 +60,9 @@ lol.Plugin.startArea = function()
 
 		if( lol.Plugin.config.displayLife)
 		{
-			console.log('populated')
 			var oldUpdate = lol.Area.log.update
 			lol.Area.log.update = function()
 			{
-				console.log('called')
 				oldUpdate()
 				var evt1 = new Event('pluginFromPageEvent_force')
 				// dirty hack to not rewrite the lol.Area.refresh function

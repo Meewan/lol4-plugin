@@ -21,19 +21,28 @@ def remove_file(path):
             raise
 
 
-def generate_string(path, name):
-    file_content = load_file(path)
-    file_escaped = file_content.replace('`', '\\`')
-    template = 'const %(name)s = `%(content)s`;\n'
-    return template % {
-        'name': name,
-        'content': file_escaped
-    }
+def generate_string(path, name,):
+    string_content = "const %(name)s = {};\n" % {'name': name}
+    template = "%(name)s['%(file_name)s'] = `%(content)s`;\n"
+
+    for file_name in os.listdir(path):
+        if not os.path.isfile(os.path.join(path, file_name)):
+            continue
+        clean_file_name = '_'.join(file_name.split('.')[:-1])
+        file_content = load_file(os.path.join(path, file_name))
+        file_escaped = file_content.replace('`', '\\`')
+        string_content += template % {
+            'name': name,
+            'content': file_escaped,
+            'file_name': clean_file_name
+        }
+
+    return string_content
 
 
 def generate_injectable_file():
-    css = generate_string(get_dir() + '/injectable/style.css', 'css')
-    js = generate_string(get_dir() + '/injectable/script.js', 'js')
+    css = generate_string(get_dir() + '/injectable/css', 'css')
+    js = generate_string(get_dir() + '/injectable/js', 'js')
     remove_file(get_dir() + '/plugin/injection.js')
     with open(get_dir() + '/plugin/injection.js', 'w') as f:
         f.write(css + js)

@@ -1,0 +1,8 @@
+#plugin_ActionSearch
+{
+	width: 94%;
+	background: #fff url(/img/icon/search.png) no-repeat 7px center;
+	height: 30px;
+	background-size: 16px 16px;
+	padding-left: 30px;
+}

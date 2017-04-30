@@ -1,15 +1,14 @@
 {
     "manifest_version": 2,
     "name": "landsoflords community extension",
-    "version": "0.9.2",
+    "version": "0.9.3",
 
     "applications":
     {
         "gecko":
         {
-            "id": "lol4-plugin@git",
-            "strict_min_version": "52.0",
-            "update_url": "https://plugin.lol.meewan.fr/download/plugin/update.json"
+            "id": "lol4-plugin@mofo",
+            "strict_min_version": "52.0"
         }
     },
 
