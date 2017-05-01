@@ -1,13 +1,13 @@
 {
     "manifest_version": 2,
     "name": "landsoflords community extension",
-    "version": "0.9.3",
+    "version": "0.9.4",
 
     "applications":
     {
         "gecko":
         {
-            "id": "lol4-plugin@mofo",
+            "id": "lol4-plugin@git",
             "strict_min_version": "52.0"
         }
     },
