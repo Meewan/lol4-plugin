@@ -6,7 +6,9 @@ const DEFAULT_CONFIGURATION = {
 		searchAction: true,
 		searcActionHistory: true,
 		displayLifeHeavyUpdate: true,
-		textSelect: true
+		textSelect: true,
+		multiTab: true,
+		multiTabPrefix: undefined
 }
 
 /**
@@ -69,4 +71,16 @@ function insertAfter(refElement, element)
 function logError(error)
 {
 	console.error(error)
+}
+
+function generateRandom(length)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < length; i++ )
+    {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
 }

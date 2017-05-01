@@ -48,6 +48,13 @@ function removeRain()
 
 }
 
+function startMultitab()
+{
+	if(configuration.multiTab)
+	{
+		injectCode('script', js['multi_tab'])
+	}
+}
 
 // add end date on service bar bar
 function displayService(force)
@@ -322,11 +329,20 @@ function start()
 	getConfiguration(function(config)
 	{
 		configuration = config
-		configInjector(lol, config)
-		if(config.textSelect)
+		// multiTabPrefix management
+		if(configuration.multiTabPrefix === undefined)
+		{
+			configuration.multiTabPrefix = generateRandom(20)
+			setToStorage('multiTabPrefix', configuration.multiTabPrefix)
+		}
+
+		configInjector(lol, configuration)
+		if(configuration.textSelect)
 		{
 			injectCode('style', css['text_select'])
 		}
+		startMultitab()
+
 		pageEventHandlerInit()
 		startRes()
 		startSearch()

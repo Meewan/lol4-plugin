@@ -6,7 +6,9 @@ const DEFAULT_CONFIGURATION = {
 		searchAction: true,
 		searcActionHistory: true,
 		displayLifeHeavyUpdate: true,
-		textSelect: true
+		textSelect: true,
+		multiTab: true,
+		multiTabPrefix: undefined
 }
 
 function start()
